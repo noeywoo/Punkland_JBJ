@@ -13,3 +13,7 @@ end)
 Server.GetTopic("공용003").Add(function(text)
 unit.StartGlobalEvent(003)
 end)
+
+Server.GetTopic("공용005").Add(function(text)
+unit.StartGlobalEvent(005)
+end)
