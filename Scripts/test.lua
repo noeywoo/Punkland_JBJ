@@ -1,11 +1,10 @@
 local inputCooldown = 0
-local cooldownTime = 0.5
+local cooldownTime = 1
 local lastX, lastY = nil, nil
 
 local function fireServerEvents()
-     -- 서버의 공용 이벤트 실행
     Client.FireEvent("공용004")
-    Client.FireEvent("공용005")
+    Client.FireEvent("공용006")
     Client.FireEvent("공용007")
 end
 
@@ -20,6 +19,13 @@ local function inputLoop()
     if lastX and lastY and (me.x ~= lastX or me.y ~= lastY) then
         print(string.format("이동중: 현재좌표 (%.1f, %.1f)", me.x, me.y))
         lastX, lastY = me.x, me.y
+        Client.RunLater(inputLoop, 0.05)
+        return
+    end
+
+    -- 쿨다운 시간 감소
+    if inputCooldown > 0 then
+        inputCooldown = inputCooldown - 0.05
         Client.RunLater(inputLoop, 0.05)
         return
     end

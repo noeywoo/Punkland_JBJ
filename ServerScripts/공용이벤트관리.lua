@@ -14,8 +14,8 @@ Server.GetTopic("공용003").Add(function(text)
 unit.StartGlobalEvent(003)
 end)
 
-Server.GetTopic("공용005").Add(function(text)
-unit.StartGlobalEvent(005)
+Server.GetTopic("공용006").Add(function(text)
+unit.StartGlobalEvent(006)
 end)
 
 Server.GetTopic("공용004").Add(function(text)
