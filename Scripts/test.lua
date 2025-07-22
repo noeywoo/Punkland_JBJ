@@ -8,7 +8,7 @@ local pendingFire = false
 
 local function fireServerEvents()
     Client.FireEvent("공용004")
-    -- Client.FireEvent("공용006")
+    Client.FireEvent("공용006")
     Client.FireEvent("공용007")
 end
 
