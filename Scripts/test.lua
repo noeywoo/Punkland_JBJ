@@ -1,5 +1,5 @@
 local inputCooldown = 0
-local cooldownTime = 1
+local cooldownTime = 0.5
 local lastX, lastY = nil, nil
 
 local function fireServerEvents()
