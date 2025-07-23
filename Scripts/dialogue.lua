@@ -73,13 +73,32 @@ function Dialogue(...)
         dialogueQueue = {}
     end)
 
-    dialogue.onClick.Add(function()
+       dialogue.onClick.Add(function()
         clickCount = clickCount + 1
 
         if clickCount == 1 then
             Client.GetPage("story").GetControl("Scene2").visible = true
         elseif clickCount == 2 then
             Client.GetPage("story").GetControl("Scene3").visible = true
+        elseif clickCount == 3 then
+            Client.GetPage("story").GetControl("Scene4").visible = true
+        elseif clickCount == 4 then
+            Client.GetPage("story").GetControl("Scene5").visible = true
+        elseif clickCount == 5 then
+            Client.GetPage("story").GetControl("Scene6").visible = true
+        elseif clickCount == 6 then
+            Client.GetPage("story").GetControl("Scene7").visible = true
+        elseif clickCount == 7 then
+            Client.GetPage("story").GetControl("Scene8").visible = true
+        elseif clickCount == 8 then
+            Client.GetPage("story").GetControl("Scene9").visible = true
+        elseif clickCount == 9 then
+            Client.GetPage("story").GetControl("Scene10").visible = true
+        elseif clickCount == 10 then
+            Client.GetPage("story").GetControl("Scene11").visible = true
+        elseif clickCount == 11 then
+            Client.GetPage("story").GetControl("Scene12").visible = true
+            
         end
 
         table.remove(t, 1)
@@ -96,7 +115,19 @@ function Dialogue(...)
 end
 
 -- ✅ 예시 실행
-DialogueQueue("안녕하세요", "장발장입니다", "빵을 먹겠습니다")
+DialogueQueue( 
+    "전체사진1",
+    "Scene1", 
+    "Scene2",
+    "Scene3", 
+    "전체사진2",
+    "Scene4", 
+    "Scene5", 
+    "Scene6", 
+    "전체사진3", 
+    "Scene7", 
+    "Scene8",
+    "Scene9")
 
 Client.GetTopic("보스hp").Add(function(x)
     if x == 1 then
