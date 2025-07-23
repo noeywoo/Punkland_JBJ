@@ -29,3 +29,13 @@ end)
 Server.GetTopic("공용007").Add(function(text)
 unit.StartGlobalEvent(007)
 end)
+
+local function CheckBossHP()
+    if Server.GetWorldVar(8) == 1 then
+        Server.FireEvent("보스hp", 1)
+        Server.SetWorldVar(8, 0)  -- 보스 HP 이벤트가 발생했음을 표시
+    end
+    Server.RunLater(CheckBossHP, 0.5)  -- 재귀 호출로 루프
+end
+
+CheckBossHP()  -- 최초 실행
