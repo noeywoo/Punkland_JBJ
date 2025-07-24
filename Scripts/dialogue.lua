@@ -116,18 +116,18 @@ end
 
 -- ✅ 예시 실행
 DialogueQueue( 
-    "전체사진1",
-    "Scene1", 
-    "Scene2",
-    "Scene3", 
-    "전체사진2",
-    "Scene4", 
-    "Scene5", 
-    "Scene6", 
-    "전체사진3", 
-    "Scene7", 
-    "Scene8",
-    "Scene9")
+    {text="전체사진1",image="C:/Users/KGA/Documents/Nekoland/P/Pictures"}
+    {"Scene1", }
+    {"Scene2",}
+    {"Scene3", },
+    {"전체사진2"},,
+    {"Scene4", },
+    {"Scene5", },
+    {"Scene6", },
+    {"전체사진3",} ,
+    {"Scene7", },
+    {"Scene8",},
+    {"Scene9"})
 
 Client.GetTopic("보스hp").Add(function(x)
     if x == 1 then
