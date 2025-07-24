@@ -6,10 +6,8 @@ local dialogue = nil
 local dialogueQueue = {}
 local dialogueActive = false
 
-function DialogueQueue(...)
-    for _, line in ipairs({...}) do
-        table.insert(dialogueQueue, line)
-    end
+function DialogueQueue(pageName, ...)
+    table.insert(dialogueQueue, {page = pageName, lines = {...}})
     if not dialogueActive then
         StartDialogueQueue()
     end
@@ -21,15 +19,17 @@ function StartDialogueQueue()
         return
     end
     dialogueActive = true
-    Dialogue(unpack(dialogueQueue))
-    dialogueQueue = {}
+    local nextDialogue = table.remove(dialogueQueue, 1)
+    Dialogue(nextDialogue.page, unpack(nextDialogue.lines))
 end
 
 -- 대화창 초기화
 function ResetDialogue()
     if t[1] then
         for i, v in pairs(t) do
-            v.Destroy()
+            if type(v) == "userdata" and v.Destroy then
+                v.Destroy()
+            end
             t[i] = nil
         end
     end
@@ -41,12 +41,17 @@ function ResetDialogue()
 end
 
 -- 대화창 생성
-function Dialogue(...)
+function Dialogue(pageName, ...)
     ResetDialogue()
     clickCount = 0
+    local currentPage = Client.GetPage(pageName)
 
     for _, v in ipairs({...}) do
         table.insert(t, v)
+    end
+
+    if currentPage.GetControl("Scene1") then
+        currentPage.GetControl("Scene1").visible = true
     end
 
     dialogue = Button('', Rect(0, 0, Client.width, Client.height * 0.3))
@@ -66,39 +71,18 @@ function Dialogue(...)
     dialogue.children[2].anchor = 2
 
     dialogue.children[2].onClick.Add(function()
-        Client.GetPage("story").Destroy()
-        dialogue.Destroy()
-        dialogue = nil
+        currentPage.Destroy()
+        ResetDialogue()
         dialogueActive = false
         dialogueQueue = {}
     end)
 
-       dialogue.onClick.Add(function()
+    dialogue.onClick.Add(function()
         clickCount = clickCount + 1
 
-        if clickCount == 1 then
-            Client.GetPage("story").GetControl("Scene2").visible = true
-        elseif clickCount == 2 then
-            Client.GetPage("story").GetControl("Scene3").visible = true
-        elseif clickCount == 3 then
-            Client.GetPage("story").GetControl("Scene4").visible = true
-        elseif clickCount == 4 then
-            Client.GetPage("story").GetControl("Scene5").visible = true
-        elseif clickCount == 5 then
-            Client.GetPage("story").GetControl("Scene6").visible = true
-        elseif clickCount == 6 then
-            Client.GetPage("story").GetControl("Scene7").visible = true
-        elseif clickCount == 7 then
-            Client.GetPage("story").GetControl("Scene8").visible = true
-        elseif clickCount == 8 then
-            Client.GetPage("story").GetControl("Scene9").visible = true
-        elseif clickCount == 9 then
-            Client.GetPage("story").GetControl("Scene10").visible = true
-        elseif clickCount == 10 then
-            Client.GetPage("story").GetControl("Scene11").visible = true
-        elseif clickCount == 11 then
-            Client.GetPage("story").GetControl("Scene12").visible = true
-            
+        local sceneName = "Scene" .. tostring(clickCount + 1) -- Scene2부터 시작
+        if currentPage.GetControl(sceneName) then
+            currentPage.GetControl(sceneName).visible = true
         end
 
         table.remove(t, 1)
@@ -106,31 +90,37 @@ function Dialogue(...)
         if t[1] then
             dialogue.children[1].text = t[1]
         else
-            Client.GetPage("story").Destroy()
+            currentPage.Destroy()
             dialogue.Destroy()
             dialogue = nil
-            StartDialogueQueue()  -- 다음 대화 큐 실행
+            StartDialogueQueue()
         end
     end)
 end
 
 -- ✅ 예시 실행
-DialogueQueue( 
-    "전체사진1",
-    "Scene1",
-    "Scene2",
-    "Scene3", 
-    "전체사진2",
-    "Scene4", 
-    "Scene5", 
-    "Scene6", 
-    "전체사진3",
-    "Scene7",
-    "Scene8",
-    "Scene9")
+
+
+-- Client.RunLater(function()
+--     DialogueQueue( 
+--         "story",
+--         "전체사진1",
+--         "Scene1",
+--         "Scene2",
+--         "Scene3", 
+--         "전체사진2",
+--         "Scene4", 
+--         "Scene5", 
+--         "Scene6", 
+--         "전체사진3",
+--         "Scene7",
+--         "Scene8",
+--         "Scene9"
+--     )
+-- end, 0.2)  -- 페이지가 완전히 뜰 시간을 약간 준다
 
 Client.GetTopic("보스hp").Add(function(x)
     if x == 1 then
-        DialogueQueue("빵 더 없나", "맛있게 먹겠습니다!")
+        DialogueQueue("story2", "빵 더 없나", "맛있게 먹겠습니다!")
     end
 end)
