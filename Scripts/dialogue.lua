@@ -49,14 +49,6 @@ function Dialogue(...)
         table.insert(t, v)
     end
 
-
-    local current = t[1]
-    local text = type(current) == "table" and current.text or current  -- 말 내용
-    local image = type(current) == "table" and current.image or nil    -- 초상화 이미지 경로
-
-
-
-
     dialogue = Button('', Rect(0, 0, Client.width, Client.height * 0.3))
     dialogue.showOnTop = true
     dialogue.color = Color(0, 0, 0, 150)
