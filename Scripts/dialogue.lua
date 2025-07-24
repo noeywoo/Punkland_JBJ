@@ -104,7 +104,6 @@ function Dialogue(pageName, ...)
 
     dialogue.onClick.Add(function()
         clickCount = clickCount + 1
-
         local sceneName = "Scene" .. tostring(clickCount + 1) -- Scene2부터 시작
         if currentPage.GetControl(sceneName) then
             currentPage.GetControl(sceneName).visible = true

@@ -1,5 +1,5 @@
 local inputCooldown = 0
-local cooldownTime = 0.5
+local cooldownTime = 0.2
 local lastX, lastY = nil, nil
 local fireEventThreshold = 5.0
 
