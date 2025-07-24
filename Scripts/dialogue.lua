@@ -59,23 +59,48 @@ function Dialogue(pageName, ...)
     dialogue.color = Color(0, 0, 0, 150)
     dialogue.pivotY = 1
     dialogue.anchor = 6
+    
+    local faceImage = Image('Pictures/표정4.png', Rect(15, 15, 80, 80)) -- 파일명은 프로젝트 내에 존재하는 이미지 리소스명이어야 함
+    -- faceImage.raycastTarget = false
+    dialogue.AddChild(faceImage)
+    
 
-    dialogue.AddChild(Text(t[1], Rect(15, 15, dialogue.width * 0.7, dialogue.height * 0.7)))
-    dialogue.children[1].textSize = 18
-    dialogue.children[1].textAlign = 0
+    -- 👇 대사 텍스트 추가 (이미지 오른쪽으로 약간 이동)
+    local textBox = Text(t[1], Rect(110, 15, dialogue.width * 0.7, dialogue.height * 0.7))
+    textBox.textSize = 18
+    textBox.textAlign = 0
+    -- textBox.raycastTarget = false
+    dialogue.AddChild(textBox)
 
-    dialogue.AddChild(Button('스킵하기', Rect(0, 0, 100, 30)))
-    dialogue.children[2].pivotX = 1
-    dialogue.children[2].pivotY = 1
-    dialogue.children[2].textColor = Color(0, 0, 0)
-    dialogue.children[2].anchor = 2
+    -- dialogue.AddChild(Text(t[1], Rect(15, 15, dialogue.width * 0.7, dialogue.height * 0.7)))
+    -- dialogue.children[1].textSize = 18
+    -- dialogue.children[1].textAlign = 0
 
-    dialogue.children[2].onClick.Add(function()
+    local skipButton = Button('스킵하기', Rect(0, 0, 100, 30))
+    skipButton.pivotX = 1
+    skipButton.pivotY = 1
+    skipButton.textColor = Color(0, 0, 0)
+    skipButton.anchor = 2
+    skipButton.onClick.Add(function()
         currentPage.Destroy()
         ResetDialogue()
         dialogueActive = false
         dialogueQueue = {}
     end)
+    dialogue.AddChild(skipButton)
+
+    -- dialogue.AddChild(Button('스킵하기', Rect(0, 0, 100, 30)))
+    -- dialogue.children[2].pivotX = 1
+    -- dialogue.children[2].pivotY = 1
+    -- dialogue.children[2].textColor = Color(0, 0, 0)
+    -- dialogue.children[2].anchor = 2
+
+    -- dialogue.children[2].onClick.Add(function()
+    --     currentPage.Destroy()
+    --     ResetDialogue()
+    --     dialogueActive = false
+    --     dialogueQueue = {}
+    -- end)
 
     dialogue.onClick.Add(function()
         clickCount = clickCount + 1
@@ -88,7 +113,8 @@ function Dialogue(pageName, ...)
         table.remove(t, 1)
 
         if t[1] then
-            dialogue.children[1].text = t[1]
+            -- dialogue.children[1].text = t[1]
+            textBox.text = t[1]
         else
             currentPage.Destroy()
             dialogue.Destroy()
