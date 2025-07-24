@@ -30,6 +30,10 @@ Server.GetTopic("공용007").Add(function(text)
 unit.StartGlobalEvent(007)
 end)
 
+-- Server.GetTopic("대화종료").Add(function(text)
+-- unit.StartGlobalEvent(027)
+-- end)
+
 local function TurnCheck()
     Server.FireEvent("turn", Server.GetWorldVar(0))
     Server.RunLater(TurnCheck, 0.1)  -- 0.1초마다 턴 체크
