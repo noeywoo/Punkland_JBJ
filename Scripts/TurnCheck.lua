@@ -6,3 +6,5 @@ end)
 end
 
 Client.RunLater(TurnCheck_CL, 0.1)
+
+Client.controller.canJump = false -- 점프 비활성화
