@@ -86,6 +86,9 @@ function Dialogue(pageName, ...)
         ResetDialogue()
         dialogueActive = false
         dialogueQueue = {}
+        if Client.GetPage("StandTurn").GetControl("Stand_Turn").visible == false then
+            Client.GetPage("StandTurn").GetControl("Stand_Turn").visible = true
+        end
     end)
     dialogue.AddChild(skipButton)
 
@@ -118,10 +121,13 @@ function Dialogue(pageName, ...)
             currentPage.Destroy()
             dialogue.Destroy()
             dialogue = nil
-            -- if #dialogueQueue == 0 then
-            --     -- 모든 대화가 끝났을 때 실행됨
-            --     Client.FireEvent("대화종료")  -- 서버에 이벤트 전달
-            -- end
+            if #dialogueQueue == 0 then
+                -- 모든 대화가 끝났을 때 실행됨
+                if Client.GetPage("StandTurn").GetControl("Stand_Turn").visible == false then
+                    Client.GetPage("StandTurn").GetControl("Stand_Turn").visible = true
+                end
+                -- Client.FireEvent("대화종료")  -- 서버에 이벤트 전달
+            end
             StartDialogueQueue()
         end
     end)
