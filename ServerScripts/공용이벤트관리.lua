@@ -50,7 +50,12 @@ local function CheckBossHP()
     Server.RunLater(CheckBossHP, 0.5)  -- 재귀 호출로 루프
 end
 
+local function StageCheck()
+    Server.FireEvent("Stage", Server.GetWorldVar(11))
+    Server.RunLater(StageCheck, 0.1)  -- 0.1초마다 턴 체크
+end
+
 TurnCheck()
 CheckBossHP()  -- 최초 실행
-
+StageCheck()
 timer(1)

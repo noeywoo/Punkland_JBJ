@@ -10,7 +10,6 @@ local function fireServerEvents()
     Client.FireEvent("공용004")
     -- Client.FireEvent("공용006")
     Client.FireEvent("공용007")
-    Client.FireEvent("공용032")
 end
 
 local function hasMovedEnough(x1, y1, x2, y2, threshold)
