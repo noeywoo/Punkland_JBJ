@@ -10,6 +10,7 @@ local function fireServerEvents()
     Client.FireEvent("공용004")
     -- Client.FireEvent("공용006")
     Client.FireEvent("공용007")
+    Client.FireEvent("공용034")
 end
 
 local function hasMovedEnough(x1, y1, x2, y2, threshold)
@@ -28,7 +29,7 @@ local function inputLoop()
 
     -- 이동 중인지 확인
     if lastX and lastY and (me.x ~= lastX or me.y ~= lastY) then
-        print(string.format("이동중: 현재좌표 (%.1f, %.1f)", me.x, me.y))
+        -- print(string.format("이동중: 현재좌표 (%.1f, %.1f)", me.x, me.y))
         lastX, lastY = me.x, me.y
         Client.RunLater(inputLoop, 0.05)
         return
@@ -37,6 +38,7 @@ local function inputLoop()
     -- 이동 후 위치 도착했을 때 fire 조건 확인
     if pendingFire and hasMovedEnough(prevMoveX, prevMoveY, me.x, me.y, fireEventThreshold) then
         fireServerEvents()
+        me:PlaySE("Video-Game-Bonus-_저작권자-Universfield-form-Pixabay_-Vol-edit.wav", 10)
         pendingFire = false
     end
 
@@ -55,8 +57,9 @@ local function inputLoop()
 
     if dx ~= 0 or dy ~= 0 then
         prevMoveX, prevMoveY = me.x, me.y
-        print(string.format("이동명령: Go(%d, %d) | 이전좌표 (%.1f, %.1f)", dx, dy, prevMoveX, prevMoveY))
+        -- print(string.format("이동명령: Go(%d, %d) | 이전좌표 (%.1f, %.1f)", dx, dy, prevMoveX, prevMoveY))
         me:Go(dx, dy)
+        -- me:PlaySE("Video-Game-Bonus-_저작권자-Universfield-form-Pixabay_-Vol-edit.wav", 10)
         inputCooldown = cooldownTime
         lastX, lastY = me.x, me.y
         pendingFire = true
