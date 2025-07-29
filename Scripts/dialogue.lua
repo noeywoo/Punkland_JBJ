@@ -60,13 +60,13 @@ function Dialogue(pageName, ...)
     dialogue.pivotY = 1
     dialogue.anchor = 6
     
-    local faceImage = Image('Pictures/표정4.png', Rect(15, 15, 80, 80)) -- 파일명은 프로젝트 내에 존재하는 이미지 리소스명이어야 함
-    -- faceImage.raycastTarget = false
-    dialogue.AddChild(faceImage)
+    -- local faceImage = Image('Pictures/표정4.png', Rect(15, 15, 80, 80)) -- 파일명은 프로젝트 내에 존재하는 이미지 리소스명이어야 함
+    -- -- faceImage.raycastTarget = false
+    -- dialogue.AddChild(faceImage)
     
 
     -- 👇 대사 텍스트 추가 (이미지 오른쪽으로 약간 이동)
-    local textBox = Text(t[1], Rect(110, 15, dialogue.width * 0.7, dialogue.height * 0.7))
+    local textBox = Text(t[1], Rect(15, 15, dialogue.width * 0.7, dialogue.height * 0.7))
     textBox.textSize = 18
     textBox.textAlign = 0
     -- textBox.raycastTarget = false
@@ -86,6 +86,7 @@ function Dialogue(pageName, ...)
         ResetDialogue()
         dialogueActive = false
         dialogueQueue = {}
+        Client.FireEvent("방향키 대사")
         -- if Client.GetPage("StandTurn").GetControl("Stand_Turn").visible == false then
         --     Client.GetPage("StandTurn").GetControl("Stand_Turn").visible = true
         -- end
