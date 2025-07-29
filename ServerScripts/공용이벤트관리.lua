@@ -33,9 +33,15 @@ end)
 Server.GetTopic("방향키 대사").Add(function(text)
 unit.StartGlobalEvent(036)
 end)
+
+Server.GetTopic("다시시작").Add(function(text)
+unit.StartGlobalEvent(042)
+end)
+
 -- Server.GetTopic("대화종료").Add(function(text)
 -- unit.StartGlobalEvent(027)
 -- end)
+
 local function timer(second)
     SetWorldVar(31, Server.GetWorldVar(031) + 1)
     Server.RunLater(timer, second)
