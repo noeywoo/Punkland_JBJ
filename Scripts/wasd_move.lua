@@ -6,7 +6,7 @@ local fireEventThreshold = 5.0
 local prevMoveX, prevMoveY = nil, nil
 local pendingFire = false
 
-turn = 20 -- 턴 수
+turn = 0 -- 턴 수
 stage = 0 -- 현재 스테이지
 talkTrigger = 0 -- 대사 트리거
 Trigger1_3a = 0 -- 트리거 1-3a

@@ -5,7 +5,8 @@ local function TurnCheck_CL()
 end
 
 local function StageUI()
-        Client.GetPage("map1").GetControl("Stage").GetChild("Stage_num").text = stage
+    Client.GetPage("map1").GetControl("Stage").GetChild("Stage_num").text = stage
+    Client.RunLater(StageUI, 0.1)
 end
 
 local function TurnCheck()
