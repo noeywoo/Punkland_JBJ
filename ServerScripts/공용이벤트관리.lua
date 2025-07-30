@@ -1,3 +1,5 @@
+turn_sv = 0
+
 Server.GetTopic("방향키 대사").Add(function(text)
 unit.StartGlobalEvent(036)
 end)
@@ -6,18 +8,21 @@ Server.GetTopic("다시시작").Add(function(text)
 unit.StartGlobalEvent(042)
 end)
 
--- Server.GetTopic("대화종료").Add(function(text)
--- unit.StartGlobalEvent(027)
--- end)
-
 -- local function timer(second)
 --     SetWorldVar(31, Server.GetWorldVar(031) + 1)
 --     Server.RunLater(timer, second)
 -- end
-local function TurnCheck()
-    Server.FireEvent("turn", Server.GetWorldVar(0))
-    Server.RunLater(TurnCheck, 0.1)  -- 0.1초마다 턴 체크
+
+local function TurnCheck_SV()
+    Server.GetTopic("turn").Add(function(x)
+        turn_sv = x
+    end)
 end
+
+-- local function TurnCheck()
+--     Server.FireEvent("turn", Server.GetWorldVar(0))
+--     Server.RunLater(TurnCheck, 0.1)  -- 0.1초마다 턴 체크
+-- end
 
 -- local function CheckBossHP()
 --     if Server.GetWorldVar(8) == 1 then
@@ -27,12 +32,13 @@ end
 --     Server.RunLater(CheckBossHP, 0.5)  -- 재귀 호출로 루프
 -- end
 
-local function StageCheck()
-    Server.FireEvent("Stage", Server.GetWorldVar(11))
-    Server.RunLater(StageCheck, 0.1)  -- 0.1초마다 턴 체크
-end
+-- local function StageCheck()
+--     Server.FireEvent("Stage", Server.GetWorldVar(11))
+--     Server.RunLater(StageCheck, 0.1)  -- 0.1초마다 턴 체크
+-- end
 
-TurnCheck()
--- CheckBossHP()  -- 최초 실행
-StageCheck()
+Server.RunLater(TurnCheck_SV, 0.1)
+-- TurnCheck()
+-- -- CheckBossHP()  -- 최초 실행
+-- StageCheck()
 -- timer(1)
