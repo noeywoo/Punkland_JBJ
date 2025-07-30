@@ -6,12 +6,21 @@ local fireEventThreshold = 5.0
 local prevMoveX, prevMoveY = nil, nil
 local pendingFire = false
 
-local function fireServerEvents()
-    Client.FireEvent("공용004")
-    -- Client.FireEvent("공용006")
-    Client.FireEvent("공용007")
-    Client.FireEvent("공용034")
-end
+turn = 20 -- 턴 수
+stage = 0 -- 현재 스테이지
+talkTrigger = 0 -- 대사 트리거
+Trigger1_3a = 0 -- 트리거 1-3a
+Trigger1_3b = 0 -- 트리거 1-3b
+Trigger1_3c = 0 -- 트리거 1-3c
+Trigger1_4a = 0 -- 트리거 1-4a
+Trigger1_4b = 0 -- 트리거 1-4b
+
+
+-- local function fireServerEvents()
+--     Client.FireEvent("공용004")
+--     -- Client.FireEvent("공용006")
+--     Client.FireEvent("공용007")
+-- end
 
 local function hasMovedEnough(x1, y1, x2, y2, threshold)
     local dx = math.abs(x1 - x2)
@@ -37,7 +46,8 @@ local function inputLoop()
 
     -- 이동 후 위치 도착했을 때 fire 조건 확인
     if pendingFire and hasMovedEnough(prevMoveX, prevMoveY, me.x, me.y, fireEventThreshold) then
-        fireServerEvents()
+        -- fireServerEvents()
+        turn = turn - 1
         me:PlaySE("Video-Game-Bonus-_저작권자-Universfield-form-Pixabay_-Vol-edit.wav", 10)
         pendingFire = false
     end
@@ -69,3 +79,4 @@ local function inputLoop()
 end
 
 Client.RunLater(inputLoop, 0.05)
+print(turn)

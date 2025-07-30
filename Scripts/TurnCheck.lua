@@ -1,13 +1,13 @@
 local function TurnCheck_CL()
     Client.GetTopic("turn").Add(function(x)
-    Client.GetPage("map1").GetControl("Turn").GetChild("Turn_num").text = x
+    Client.GetPage("map1").GetControl("Turn").GetChild("Turn_num").text = turn
 end)
     Client.RunLater(TurnCheck_CL, 0.1)  -- 0.1초마다 턴 체크
 end
 
 local function StageUI()
     Client.GetTopic("Stage").Add(function(x)
-        Client.GetPage("map1").GetControl("Stage").GetChild("Stage_num").text = x
+        Client.GetPage("map1").GetControl("Stage").GetChild("Stage_num").text = stage
     end)
 end
 
