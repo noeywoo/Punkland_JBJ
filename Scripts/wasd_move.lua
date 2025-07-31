@@ -15,6 +15,7 @@ Trigger1_3c = 0 -- 트리거 1-3c
 Trigger1_4a = 0 -- 트리거 1-4a
 Trigger1_4b = 0 -- 트리거 1-4b
 
+MyGame = {}
 
 -- local function fireServerEvents()
 --     Client.FireEvent("공용004")
@@ -27,6 +28,19 @@ local function hasMovedEnough(x1, y1, x2, y2, threshold)
     local dy = math.abs(y1 - y2)
     -- print(string.format("이동 거리 체크: dx=%.2f, dy=%.2f", dx, dy))
     return dx > threshold or dy > threshold
+end
+
+function MyGame.movePlayer(dx, dy)
+    local me = Client.myPlayerUnit
+    if not me then return end
+
+    if inputCooldown > 0 then return end
+
+    prevMoveX, prevMoveY = me.x, me.y
+    me:Go(dx, dy)
+    inputCooldown = cooldownTime
+    lastX, lastY = me.x, me.y
+    pendingFire = true
 end
 
 local function inputLoop()
@@ -70,13 +84,7 @@ local function inputLoop()
     elseif Input.GetKey(Input.KeyCode.D) then dx = 16 end
 
     if dx ~= 0 or dy ~= 0 then
-        prevMoveX, prevMoveY = me.x, me.y
-        -- print(string.format("이동명령: Go(%d, %d) | 이전좌표 (%.1f, %.1f)", dx, dy, prevMoveX, prevMoveY))
-        me:Go(dx, dy)
-        -- me:PlaySE("Concrete Footsteps 2.wav", 10)
-        inputCooldown = cooldownTime
-        lastX, lastY = me.x, me.y
-        pendingFire = true
+        MyGame.movePlayer(dx, dy)
     end
 
     Client.RunLater(inputLoop, 0.05)
