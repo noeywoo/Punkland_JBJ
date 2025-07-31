@@ -34,6 +34,8 @@ function MyGame.movePlayer(dx, dy)
     local me = Client.myPlayerUnit
     if not me then return end
 
+    if turn <= 0 then return end  -- 턴이 0이면 이동 차단
+
     if inputCooldown > 0 then return end
 
     prevMoveX, prevMoveY = me.x, me.y

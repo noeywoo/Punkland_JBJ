@@ -1,6 +1,9 @@
 local function TurnCheck_CL()
-    Client.GetPage("map1").GetControl("Turn").GetChild("Turn_num").text = turn
-
+    if turn >= 0 then
+        Client.GetPage("map1").GetControl("Turn").GetChild("Turn_num").text = turn
+    else
+        Client.GetPage("map1").GetControl("Turn").GetChild("Turn_num").text = 0
+    end
     Client.RunLater(TurnCheck_CL, 0.1)  -- 0.1초마다 턴 체크
 end
 
