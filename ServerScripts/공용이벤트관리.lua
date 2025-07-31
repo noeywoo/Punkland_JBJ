@@ -1,4 +1,10 @@
-turn_sv = 0
+Server.GetTopic("짝수턴").Add(function(text)
+unit.StartGlobalEvent(001)
+end)
+
+Server.GetTopic("홀수턴").Add(function(text)
+unit.StartGlobalEvent(002)
+end)
 
 Server.GetTopic("방향키 대사").Add(function(text)
 unit.StartGlobalEvent(036)
@@ -13,11 +19,6 @@ end)
 --     Server.RunLater(timer, second)
 -- end
 
-local function TurnCheck_SV()
-    Server.GetTopic("turn").Add(function(x)
-        turn_sv = x
-    end)
-end
 
 -- local function TurnCheck()
 --     Server.FireEvent("turn", Server.GetWorldVar(0))

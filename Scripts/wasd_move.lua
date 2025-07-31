@@ -83,4 +83,3 @@ local function inputLoop()
 end
 
 Client.RunLater(inputLoop, 0.05)
-print(turn)
