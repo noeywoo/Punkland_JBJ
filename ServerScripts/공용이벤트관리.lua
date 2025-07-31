@@ -6,6 +6,10 @@ Server.GetTopic("홀수턴").Add(function(text)
 unit.StartGlobalEvent(002)
 end)
 
+Server.GetTopic("피격음출력").Add(function(text)
+unit.StartGlobalEvent(004)
+end)
+
 Server.GetTopic("위로 이동").Add(function(text)
 unit.StartGlobalEvent(022)
 end)
