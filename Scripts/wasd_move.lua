@@ -65,7 +65,9 @@ local function inputLoop()
         me:PlaySE("Concrete Footsteps 2.wav", 4)
 
         if (stage == 2 or stage == 4) and (turn % 2 == 1) then
-        me:PlaySE("Sword Sound 2.wav", 3)
+            me:PlaySE("Sword Sound 2.wav", 3)
+        elseif (stage == 3) then
+            me:PlaySE("Sword Sound 2.wav", 3)
         end
         pendingFire = false
     end
