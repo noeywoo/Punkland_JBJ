@@ -48,7 +48,11 @@ local function inputLoop()
     if pendingFire and hasMovedEnough(prevMoveX, prevMoveY, me.x, me.y, fireEventThreshold) then
         -- fireServerEvents()
         turn = turn - 1
-        me:PlaySE("Video-Game-Bonus-_저작권자-Universfield-form-Pixabay_-Vol-edit.wav", 10)
+        me:PlaySE("Concrete Footsteps 2.wav", 4)
+
+        if (stage == 2 or stage == 4) and (turn % 2 == 1) then
+        me:PlaySE("Sword Sound 2.wav", 3)
+        end
         pendingFire = false
     end
 
@@ -69,7 +73,7 @@ local function inputLoop()
         prevMoveX, prevMoveY = me.x, me.y
         -- print(string.format("이동명령: Go(%d, %d) | 이전좌표 (%.1f, %.1f)", dx, dy, prevMoveX, prevMoveY))
         me:Go(dx, dy)
-        -- me:PlaySE("Video-Game-Bonus-_저작권자-Universfield-form-Pixabay_-Vol-edit.wav", 10)
+        -- me:PlaySE("Concrete Footsteps 2.wav", 10)
         inputCooldown = cooldownTime
         lastX, lastY = me.x, me.y
         pendingFire = true
