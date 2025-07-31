@@ -6,6 +6,22 @@ Server.GetTopic("홀수턴").Add(function(text)
 unit.StartGlobalEvent(002)
 end)
 
+Server.GetTopic("위로 이동").Add(function(text)
+unit.StartGlobalEvent(022)
+end)
+
+Server.GetTopic("아래로 이동").Add(function(text)
+unit.StartGlobalEvent(023)
+end)
+
+Server.GetTopic("오른쪽으로 이동").Add(function(text)
+unit.StartGlobalEvent(024)
+end)
+
+Server.GetTopic("왼쪽으로 이동").Add(function(text)
+unit.StartGlobalEvent(025)
+end)
+
 Server.GetTopic("방향키 대사").Add(function(text)
 unit.StartGlobalEvent(036)
 end)
